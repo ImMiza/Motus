@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import DefaultRole from "../data/DefaultRole";
 import DiscordCommand from "../Model/DiscordCommand";
 import { Game, Player } from "../Model/Game";
-import { loadGame, loadWords, saveGame } from "../utils/FileFunction";
+import { deleteGame, loadGame, loadWords, saveGame } from "../utils/FileFunction";
 import { normalizeText, shuffleArray } from "../utils/Function";
 import { getWord, sendResultGame } from "../utils/GameFunction";
 
@@ -61,6 +61,12 @@ async function start(message: Message): Promise<void> {
 }
 
 function executor(message: Message): void {
+    const contents = message.content.split(' ');
+
+    if(contents.length >= 2 && contents[1].toLowerCase() === 'force') {
+        deleteGame();
+    }
+    
     let game: Game;
     try {
         game = loadGame();

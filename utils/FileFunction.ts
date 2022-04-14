@@ -1,4 +1,4 @@
-import { close, openSync, readFileSync, writeFileSync } from "fs";
+import { close, openSync, readFileSync, unlink, unlinkSync, writeFileSync } from "fs";
 import { Game } from "../Model/Game";
 
 const FILE_GAME_PATH = 'data/Game.json';
@@ -24,6 +24,15 @@ function saveGame(game: Game): boolean {
     }
 }
 
+function deleteGame(): boolean {
+    try {
+        unlinkSync(FILE_GAME_PATH);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
 function loadWords(): string[] {
     try {
         return readFileSync(FILE_TXT_PATH, { encoding: 'utf8' }).split('\n');
@@ -35,5 +44,6 @@ function loadWords(): string[] {
 export {
     loadGame,
     saveGame,
-    loadWords
+    loadWords,
+    deleteGame
 };
