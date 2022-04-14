@@ -1,5 +1,6 @@
 import createRole from "./commands/createRole";
 import help from "./commands/help";
+import passPlay from "./commands/passPlay";
 import ping from "./commands/ping";
 import play from "./commands/play";
 import start from "./commands/start";
@@ -9,6 +10,7 @@ const commands = [
     ping,
     help,
     createRole,
+    passPlay,
     start,
     play
 ] as DiscordCommand[];
